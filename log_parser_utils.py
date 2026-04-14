@@ -86,7 +86,39 @@ def detect_log_format(file_path: str) -> str:
     
     if not sample_lines:
         return 'unknown'
-    
+   
+#def detect_log_format(file_path: str, sample_size: int = 20) -> str:
+    """
+    Tự động nhận diện định dạng file log bằng cách đọc một số dòng mẫu.
+    Args:
+        file_path (str): Đường dẫn tới file log.
+        sample_size (int): Số dòng mẫu để đọc. Mặc định là 20.
+    Returns:
+        'nginx', 'apache', 'syslog', 'custom', hoặc 'unknown'
+    """
+    if not os.path.exists(file_path):
+        return 'unknown'
+    with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+        sample_lines = []
+        for i, line in enumerate(f):
+            line = line.strip()
+            if line:
+                sample_lines.append(line)
+            if len(sample_lines) >= sample_size:
+                break
+    if not sample_lines:
+        return 'unknown'
+    # Phân tích mẫu ở đây...
+    return detected_format
+#Đừng quên cập nhật nơi nào đang gọi hàm cũ (như trong Log_Parser) thành:
+#detected_format = detect_log_format(file_path, sample_size=50)
+#Nhưng nếu gọi như trước:
+#detected_format = detect_log_format(file_path)
+#→ Vẫn hoạt động như cũ (sample_size=20 theo mặc định)##
+
+
+
+
     # Đếm số dòng match với từng format
     scores = {'nginx': 0, 'apache': 0, 'syslog': 0, 'custom': 0}
     

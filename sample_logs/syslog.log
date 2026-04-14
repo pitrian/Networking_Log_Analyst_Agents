@@ -44,3 +44,157 @@ Mar 13 08:06:10 webserver smartd[5000]: Device: /dev/sda, SMART Health Status: P
 Mar 13 08:07:00 webserver CRON[5100]: (root) CMD (/usr/bin/certbot renew --quiet)
 Mar 13 08:07:05 webserver certbot[5101]: Certificate not yet due for renewal
 Mar 13 08:07:10 webserver sshd[2390]: Received disconnect from 192.168.1.20 port 52431: disconnected by user
+Mar 13 08:07:15 webserver nginx[6000]: worker process 6000 started
+Mar 13 08:07:30 webserver systemd[1]: Started session 6001 of user deploy.
+Mar 13 08:07:45 webserver sshd[6002]: Accepted publickey for deploy from 192.168.1.12 port 45002 ssh2
+Mar 13 08:08:00 webserver sudo: deploy : TTY=pts/3 ; PWD=/var/www/app ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
+Mar 13 08:08:15 webserver kernel: [12813.000] TCP connection established from 192.168.1.14
+Mar 13 08:08:30 webserver CRON[6005]: (root) CMD (/usr/local/bin/cleanup_sessions.sh)
+Mar 13 08:08:45 webserver app[6006]: background queue processed 126 jobs in 14s
+Mar 13 08:09:00 webserver ufw[6007]: [UFW BLOCK] IN=eth0 OUT= SRC=10.0.0.47 DST=192.168.1.100 PROTO=TCP DPT=22
+Mar 13 08:09:15 webserver sshd[6008]: Failed password for invalid user backup from 10.0.0.48 port 45008 ssh2
+Mar 13 08:09:30 webserver sshd[6009]: Failed password for root from 10.0.0.49 port 45109 ssh2
+Mar 13 08:09:45 webserver audit[6010]: AVC apparmor=DENIED operation=open profile=nginx name=/etc/shadow pid=6010 comm=nginx requested_mask=r
+Mar 13 08:10:00 webserver systemd[1]: backup.timer: Triggered scheduled database snapshot.
+Mar 13 08:10:15 webserver backup[6012]: Snapshot completed successfully, size=2436MB
+Mar 13 08:10:30 webserver kernel: [12842.250] blk_update_request: I/O latency warning on dev sda, sector 205632
+Mar 13 08:10:45 webserver smartd[6014]: Device: /dev/sda, Temperature 41 Celsius
+Mar 13 08:11:00 webserver systemd[1]: mysql.service: Watchdog heartbeat OK, active connections=55
+Mar 13 08:11:15 webserver sshd[6016]: Received disconnect from 192.168.1.26 port 45016: disconnected by user
+Mar 13 08:11:30 webserver certbot[6017]: Renewal check finished; no certificates due
+Mar 13 08:11:45 webserver nginx[6018]: worker process 6018 started
+Mar 13 08:12:00 webserver systemd[1]: Started session 6019 of user deploy.
+Mar 13 08:12:15 webserver sshd[6020]: Accepted publickey for deploy from 192.168.1.30 port 45020 ssh2
+Mar 13 08:12:30 webserver sudo: deploy : TTY=pts/1 ; PWD=/var/www/app ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
+Mar 13 08:12:45 webserver kernel: [12871.500] TCP connection established from 192.168.1.32
+Mar 13 08:13:00 webserver CRON[6023]: (root) CMD (/usr/local/bin/cleanup_sessions.sh)
+Mar 13 08:13:15 webserver app[6024]: background queue processed 144 jobs in 11s
+Mar 13 08:13:30 webserver ufw[6025]: [UFW BLOCK] IN=eth0 OUT= SRC=10.0.0.65 DST=192.168.1.100 PROTO=TCP DPT=22
+Mar 13 08:13:45 webserver sshd[6026]: Failed password for invalid user backup from 10.0.0.66 port 45026 ssh2
+Mar 13 08:14:00 webserver sshd[6027]: Failed password for root from 10.0.0.67 port 45127 ssh2
+Mar 13 08:14:15 webserver audit[6028]: AVC apparmor=DENIED operation=open profile=nginx name=/etc/shadow pid=6028 comm=nginx requested_mask=r
+Mar 13 08:14:30 webserver systemd[1]: backup.timer: Triggered scheduled database snapshot.
+Mar 13 08:14:45 webserver backup[6030]: Snapshot completed successfully, size=2490MB
+Mar 13 08:15:00 webserver kernel: [12900.750] blk_update_request: I/O latency warning on dev sda, sector 206784
+Mar 13 08:15:15 webserver smartd[6032]: Device: /dev/sda, Temperature 41 Celsius
+Mar 13 08:15:30 webserver systemd[1]: mysql.service: Watchdog heartbeat OK, active connections=73
+Mar 13 08:15:45 webserver sshd[6034]: Received disconnect from 192.168.1.44 port 45034: disconnected by user
+Mar 13 08:16:00 webserver certbot[6035]: Renewal check finished; no certificates due
+Mar 13 08:16:15 webserver nginx[6036]: worker process 6036 started
+Mar 13 08:16:30 webserver systemd[1]: Started session 6037 of user deploy.
+Mar 13 08:16:45 webserver sshd[6038]: Accepted publickey for deploy from 192.168.1.48 port 45038 ssh2
+Mar 13 08:17:00 webserver sudo: deploy : TTY=pts/3 ; PWD=/var/www/app ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
+Mar 13 08:17:15 webserver kernel: [12930.000] TCP connection established from 192.168.1.10
+Mar 13 08:17:30 webserver CRON[6041]: (root) CMD (/usr/local/bin/cleanup_sessions.sh)
+Mar 13 08:17:45 webserver app[6042]: background queue processed 127 jobs in 8s
+Mar 13 08:18:00 webserver ufw[6043]: [UFW BLOCK] IN=eth0 OUT= SRC=10.0.0.83 DST=192.168.1.100 PROTO=TCP DPT=22
+Mar 13 08:18:15 webserver sshd[6044]: Failed password for invalid user backup from 10.0.0.84 port 45044 ssh2
+Mar 13 08:18:30 webserver sshd[6045]: Failed password for root from 10.0.0.85 port 45145 ssh2
+Mar 13 08:18:45 webserver audit[6046]: AVC apparmor=DENIED operation=open profile=nginx name=/etc/shadow pid=6046 comm=nginx requested_mask=r
+Mar 13 08:19:00 webserver systemd[1]: backup.timer: Triggered scheduled database snapshot.
+Mar 13 08:19:15 webserver backup[6048]: Snapshot completed successfully, size=2544MB
+Mar 13 08:19:30 webserver kernel: [12959.250] blk_update_request: I/O latency warning on dev sda, sector 207936
+Mar 13 08:19:45 webserver smartd[6050]: Device: /dev/sda, Temperature 41 Celsius
+Mar 13 08:20:00 webserver systemd[1]: mysql.service: Watchdog heartbeat OK, active connections=46
+Mar 13 08:20:15 webserver sshd[6052]: Received disconnect from 192.168.1.22 port 45052: disconnected by user
+Mar 13 08:20:30 webserver certbot[6053]: Renewal check finished; no certificates due
+Mar 13 08:20:45 webserver nginx[6054]: worker process 6054 started
+Mar 13 08:21:00 webserver systemd[1]: Started session 6055 of user deploy.
+Mar 13 08:21:15 webserver sshd[6056]: Accepted publickey for deploy from 192.168.1.26 port 45056 ssh2
+Mar 13 08:21:30 webserver sudo: deploy : TTY=pts/1 ; PWD=/var/www/app ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
+Mar 13 08:21:45 webserver kernel: [12988.500] TCP connection established from 192.168.1.28
+Mar 13 08:22:00 webserver CRON[6059]: (root) CMD (/usr/local/bin/cleanup_sessions.sh)
+Mar 13 08:22:15 webserver app[6060]: background queue processed 145 jobs in 12s
+Mar 13 08:22:30 webserver ufw[6061]: [UFW BLOCK] IN=eth0 OUT= SRC=10.0.0.101 DST=192.168.1.100 PROTO=TCP DPT=22
+Mar 13 08:22:45 webserver sshd[6062]: Failed password for invalid user backup from 10.0.0.102 port 45062 ssh2
+Mar 13 08:23:00 webserver sshd[6063]: Failed password for root from 10.0.0.103 port 45163 ssh2
+Mar 13 08:23:15 webserver audit[6064]: AVC apparmor=DENIED operation=open profile=nginx name=/etc/shadow pid=6064 comm=nginx requested_mask=r
+Mar 13 08:23:30 webserver systemd[1]: backup.timer: Triggered scheduled database snapshot.
+Mar 13 08:23:45 webserver backup[6066]: Snapshot completed successfully, size=2598MB
+Mar 13 08:24:00 webserver kernel: [13017.750] blk_update_request: I/O latency warning on dev sda, sector 209088
+Mar 13 08:24:15 webserver smartd[6068]: Device: /dev/sda, Temperature 41 Celsius
+Mar 13 08:24:30 webserver systemd[1]: mysql.service: Watchdog heartbeat OK, active connections=64
+Mar 13 08:24:45 webserver sshd[6070]: Received disconnect from 192.168.1.40 port 45070: disconnected by user
+Mar 13 08:25:00 webserver certbot[6071]: Renewal check finished; no certificates due
+Mar 13 08:25:15 webserver nginx[6072]: worker process 6072 started
+Mar 13 08:25:30 webserver systemd[1]: Started session 6073 of user deploy.
+Mar 13 08:25:45 webserver sshd[6074]: Accepted publickey for deploy from 192.168.1.44 port 45074 ssh2
+Mar 13 08:26:00 webserver sudo: deploy : TTY=pts/3 ; PWD=/var/www/app ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
+Mar 13 08:26:15 webserver kernel: [13047.000] TCP connection established from 192.168.1.46
+Mar 13 08:26:30 webserver CRON[6077]: (root) CMD (/usr/local/bin/cleanup_sessions.sh)
+Mar 13 08:26:45 webserver app[6078]: background queue processed 128 jobs in 9s
+Mar 13 08:27:00 webserver ufw[6079]: [UFW BLOCK] IN=eth0 OUT= SRC=10.0.0.119 DST=192.168.1.100 PROTO=TCP DPT=22
+Mar 13 08:27:15 webserver sshd[6080]: Failed password for invalid user backup from 10.0.0.120 port 45080 ssh2
+Mar 13 08:27:30 webserver sshd[6081]: Failed password for root from 10.0.0.121 port 45181 ssh2
+Mar 13 08:27:45 webserver audit[6082]: AVC apparmor=DENIED operation=open profile=nginx name=/etc/shadow pid=6082 comm=nginx requested_mask=r
+Mar 13 08:28:00 webserver systemd[1]: backup.timer: Triggered scheduled database snapshot.
+Mar 13 08:28:15 webserver backup[6084]: Snapshot completed successfully, size=2652MB
+Mar 13 08:28:30 webserver kernel: [13076.250] blk_update_request: I/O latency warning on dev sda, sector 210240
+Mar 13 08:28:45 webserver smartd[6086]: Device: /dev/sda, Temperature 41 Celsius
+Mar 13 08:29:00 webserver systemd[1]: mysql.service: Watchdog heartbeat OK, active connections=82
+Mar 13 08:29:15 webserver sshd[6088]: Received disconnect from 192.168.1.18 port 45088: disconnected by user
+Mar 13 08:29:30 webserver certbot[6089]: Renewal check finished; no certificates due
+Mar 13 08:29:45 webserver nginx[6090]: worker process 6090 started
+Mar 13 08:30:00 webserver systemd[1]: Started session 6091 of user deploy.
+Mar 13 08:30:15 webserver sshd[6092]: Accepted publickey for deploy from 192.168.1.22 port 45092 ssh2
+Mar 13 08:30:30 webserver sudo: deploy : TTY=pts/1 ; PWD=/var/www/app ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
+Mar 13 08:30:45 webserver kernel: [13105.500] TCP connection established from 192.168.1.24
+Mar 13 08:31:00 webserver CRON[6095]: (root) CMD (/usr/local/bin/cleanup_sessions.sh)
+Mar 13 08:31:15 webserver app[6096]: background queue processed 146 jobs in 13s
+Mar 13 08:31:30 webserver ufw[6097]: [UFW BLOCK] IN=eth0 OUT= SRC=10.0.0.47 DST=192.168.1.100 PROTO=TCP DPT=22
+Mar 13 08:31:45 webserver sshd[6098]: Failed password for invalid user backup from 10.0.0.48 port 45098 ssh2
+Mar 13 08:32:00 webserver sshd[6099]: Failed password for root from 10.0.0.49 port 45199 ssh2
+Mar 13 08:32:15 webserver audit[6100]: AVC apparmor=DENIED operation=open profile=nginx name=/etc/shadow pid=6100 comm=nginx requested_mask=r
+Mar 13 08:32:30 webserver systemd[1]: backup.timer: Triggered scheduled database snapshot.
+Mar 13 08:32:45 webserver backup[6102]: Snapshot completed successfully, size=2706MB
+Mar 13 08:33:00 webserver kernel: [13134.750] blk_update_request: I/O latency warning on dev sda, sector 211392
+Mar 13 08:33:15 webserver smartd[6104]: Device: /dev/sda, Temperature 41 Celsius
+Mar 13 08:33:30 webserver systemd[1]: mysql.service: Watchdog heartbeat OK, active connections=55
+Mar 13 08:33:45 webserver sshd[6106]: Received disconnect from 192.168.1.36 port 45106: disconnected by user
+Mar 13 08:34:00 webserver certbot[6107]: Renewal check finished; no certificates due
+Mar 13 08:34:15 webserver nginx[6108]: worker process 6108 started
+Mar 13 08:34:30 webserver systemd[1]: Started session 6109 of user deploy.
+Mar 13 08:34:45 webserver sshd[6110]: Accepted publickey for deploy from 192.168.1.40 port 45110 ssh2
+Mar 13 08:35:00 webserver sudo: deploy : TTY=pts/3 ; PWD=/var/www/app ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
+Mar 13 08:35:15 webserver kernel: [13164.000] TCP connection established from 192.168.1.42
+Mar 13 08:35:30 webserver CRON[6113]: (root) CMD (/usr/local/bin/cleanup_sessions.sh)
+Mar 13 08:35:45 webserver app[6114]: background queue processed 129 jobs in 10s
+Mar 13 08:36:00 webserver ufw[6115]: [UFW BLOCK] IN=eth0 OUT= SRC=10.0.0.65 DST=192.168.1.100 PROTO=TCP DPT=22
+Mar 13 08:36:15 webserver sshd[6116]: Failed password for invalid user backup from 10.0.0.66 port 45116 ssh2
+Mar 13 08:36:30 webserver sshd[6117]: Failed password for root from 10.0.0.67 port 45217 ssh2
+Mar 13 08:36:45 webserver audit[6118]: AVC apparmor=DENIED operation=open profile=nginx name=/etc/shadow pid=6118 comm=nginx requested_mask=r
+Mar 13 08:37:00 webserver systemd[1]: backup.timer: Triggered scheduled database snapshot.
+Mar 13 08:37:15 webserver backup[6120]: Snapshot completed successfully, size=2760MB
+Mar 13 08:37:30 webserver kernel: [13193.250] blk_update_request: I/O latency warning on dev sda, sector 212544
+Mar 13 08:37:45 webserver smartd[6122]: Device: /dev/sda, Temperature 41 Celsius
+Mar 13 08:38:00 webserver systemd[1]: mysql.service: Watchdog heartbeat OK, active connections=73
+Mar 13 08:38:15 webserver sshd[6124]: Received disconnect from 192.168.1.14 port 45124: disconnected by user
+Mar 13 08:38:30 webserver certbot[6125]: Renewal check finished; no certificates due
+Mar 13 08:38:45 webserver nginx[6126]: worker process 6126 started
+Mar 13 08:39:00 webserver systemd[1]: Started session 6127 of user deploy.
+Mar 13 08:39:15 webserver sshd[6128]: Accepted publickey for deploy from 192.168.1.18 port 45128 ssh2
+Mar 13 08:39:30 webserver sudo: deploy : TTY=pts/1 ; PWD=/var/www/app ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
+Mar 13 08:39:45 webserver kernel: [13222.500] TCP connection established from 192.168.1.20
+Mar 13 08:40:00 webserver CRON[6131]: (root) CMD (/usr/local/bin/cleanup_sessions.sh)
+Mar 13 08:40:15 webserver app[6132]: background queue processed 147 jobs in 14s
+Mar 13 08:40:30 webserver ufw[6133]: [UFW BLOCK] IN=eth0 OUT= SRC=10.0.0.83 DST=192.168.1.100 PROTO=TCP DPT=22
+Mar 13 08:40:45 webserver sshd[6134]: Failed password for invalid user backup from 10.0.0.84 port 45134 ssh2
+Mar 13 08:41:00 webserver sshd[6135]: Failed password for root from 10.0.0.85 port 45235 ssh2
+Mar 13 08:41:15 webserver audit[6136]: AVC apparmor=DENIED operation=open profile=nginx name=/etc/shadow pid=6136 comm=nginx requested_mask=r
+Mar 13 08:41:30 webserver systemd[1]: backup.timer: Triggered scheduled database snapshot.
+Mar 13 08:41:45 webserver backup[6138]: Snapshot completed successfully, size=2814MB
+Mar 13 08:42:00 webserver kernel: [13251.750] blk_update_request: I/O latency warning on dev sda, sector 213696
+Mar 13 08:42:15 webserver smartd[6140]: Device: /dev/sda, Temperature 41 Celsius
+Mar 13 08:42:30 webserver systemd[1]: mysql.service: Watchdog heartbeat OK, active connections=46
+Mar 13 08:42:45 webserver sshd[6142]: Received disconnect from 192.168.1.32 port 45142: disconnected by user
+Mar 13 08:43:00 webserver certbot[6143]: Renewal check finished; no certificates due
+Mar 13 08:43:15 webserver nginx[6144]: worker process 6144 started
+Mar 13 08:43:30 webserver systemd[1]: Started session 6145 of user deploy.
+Mar 13 08:43:45 webserver sshd[6146]: Accepted publickey for deploy from 192.168.1.36 port 45146 ssh2
+Mar 13 08:44:00 webserver sudo: deploy : TTY=pts/3 ; PWD=/var/www/app ; USER=root ; COMMAND=/usr/bin/systemctl status nginx
+Mar 13 08:44:15 webserver kernel: [13281.000] TCP connection established from 192.168.1.38
+Mar 13 08:44:30 webserver CRON[6149]: (root) CMD (/usr/local/bin/cleanup_sessions.sh)
+Mar 13 08:44:45 webserver app[6150]: background queue processed 130 jobs in 11s
+Mar 13 08:45:00 webserver ufw[6151]: [UFW BLOCK] IN=eth0 OUT= SRC=10.0.0.101 DST=192.168.1.100 PROTO=TCP DPT=22
+Mar 13 08:45:15 webserver sshd[6152]: Failed password for invalid user backup from 10.0.0.102 port 45152 ssh2
+Mar 13 08:45:30 webserver sshd[6153]: Failed password for root from 10.0.0.103 port 45253 ssh2

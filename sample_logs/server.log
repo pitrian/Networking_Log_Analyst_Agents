@@ -106,3 +106,95 @@
 2026-03-13 08:15:20 INFO [WebServer] Server status: 85 requests processed in last 15 minutes
 2026-03-13 08:15:25 INFO [WebServer] Average response time: 287ms
 2026-03-13 08:15:30 INFO [SystemMonitor] System summary - Uptime: 15m 29s, Total requests: 85, Errors: 9, Warnings: 22
+2026-03-13 08:15:35 INFO [WebServer] GET /api/products 200 40ms 192.168.1.10
+2026-03-13 08:15:40 INFO [WebServer] GET /api/users 200 112ms 192.168.1.15
+2026-03-13 08:15:45 INFO [WebServer] POST /api/orders 201 134ms 192.168.1.20
+2026-03-13 08:15:50 INFO [WebServer] GET /api/dashboard 200 231ms 192.168.1.25
+2026-03-13 08:15:55 WARNING [WebServer] GET /api/reports/monthly 200 2288ms 192.168.1.30 - Slow response detected
+2026-03-13 08:16:00 INFO [CacheService] Cache hit ratio: 79% (threshold: 80%)
+2026-03-13 08:16:05 WARNING [CacheService] Cache hit ratio below target for catalog namespace
+2026-03-13 08:16:10 INFO [AuthService] User 'analyst' logged in successfully from 10.0.0.99
+2026-03-13 08:16:15 WARNING [AuthService] Failed login attempt for user 'deploy' from 192.168.1.10 (attempt 4/5)
+2026-03-13 08:16:20 ERROR [AuthService] Token validation failed for request from 192.168.1.15 - signature expired
+2026-03-13 08:16:25 INFO [Database] Query completed in 45ms - table=orders rows=30
+2026-03-13 08:16:30 WARNING [Database] Slow query detected in inventory lookup - duration=1071ms
+2026-03-13 08:16:35 ERROR [Database] Deadlock found when updating order_status; transaction rolled back
+2026-03-13 08:16:40 INFO [PaymentService] Payment authorized for order ORD-3113 in 193ms
+2026-03-13 08:16:45 ERROR [PaymentService] Payment gateway returned 502 for order ORD-3114
+2026-03-13 08:16:50 WARNING [SecurityModule] Rate limit nearing threshold for IP 10.0.0.99 (95 requests/min)
+2026-03-13 08:16:55 CRITICAL [SecurityModule] Credential stuffing pattern detected from IP 192.168.1.10
+2026-03-13 08:17:00 INFO [SecurityModule] IP 192.168.1.15 added to temporary blocklist for 10 minutes
+2026-03-13 08:17:05 INFO [SchedulerService] Running scheduled task: session_cleanup
+2026-03-13 08:17:10 INFO [CronJob] Purged 139 expired sessions
+2026-03-13 08:17:15 WARNING [SystemMonitor] CPU Usage: 32%, Memory: 94%, Disk: 74%
+2026-03-13 08:17:20 ERROR [WebServer] GET /api/reports/export 500 2317ms 10.0.0.55 - Internal Server Error
+2026-03-13 08:17:25 INFO [WebServer] GET /api/products 200 854ms 10.0.0.88
+2026-03-13 08:17:30 INFO [WebServer] GET /api/users 200 926ms 10.0.0.99
+2026-03-13 08:17:35 INFO [WebServer] POST /api/orders 201 948ms 192.168.1.10
+2026-03-13 08:17:40 INFO [WebServer] GET /api/dashboard 200 145ms 192.168.1.15
+2026-03-13 08:17:45 WARNING [WebServer] GET /api/reports/monthly 200 2202ms 192.168.1.20 - Slow response detected
+2026-03-13 08:17:50 INFO [CacheService] Cache hit ratio: 84% (threshold: 80%)
+2026-03-13 08:17:55 WARNING [CacheService] Cache hit ratio below target for catalog namespace
+2026-03-13 08:18:00 INFO [AuthService] User 'analyst' logged in successfully from 10.0.0.55
+2026-03-13 08:18:05 WARNING [AuthService] Failed login attempt for user 'deploy' from 10.0.0.88 (attempt 1/5)
+2026-03-13 08:18:10 ERROR [AuthService] Token validation failed for request from 10.0.0.99 - signature expired
+2026-03-13 08:18:15 INFO [Database] Query completed in 67ms - table=orders rows=52
+2026-03-13 08:18:20 WARNING [Database] Slow query detected in inventory lookup - duration=1313ms
+2026-03-13 08:18:25 ERROR [Database] Deadlock found when updating order_status; transaction rolled back
+2026-03-13 08:18:30 INFO [PaymentService] Payment authorized for order ORD-3135 in 215ms
+2026-03-13 08:18:35 ERROR [PaymentService] Payment gateway returned 502 for order ORD-3136
+2026-03-13 08:18:40 WARNING [SecurityModule] Rate limit nearing threshold for IP 10.0.0.55 (97 requests/min)
+2026-03-13 08:18:45 CRITICAL [SecurityModule] Credential stuffing pattern detected from IP 10.0.0.88
+2026-03-13 08:18:50 INFO [SecurityModule] IP 10.0.0.99 added to temporary blocklist for 10 minutes
+2026-03-13 08:18:55 INFO [SchedulerService] Running scheduled task: session_cleanup
+2026-03-13 08:19:00 INFO [CronJob] Purged 161 expired sessions
+2026-03-13 08:19:05 WARNING [SystemMonitor] CPU Usage: 50%, Memory: 51%, Disk: 78%
+2026-03-13 08:19:10 ERROR [WebServer] GET /api/reports/export 500 2231ms 192.168.1.25 - Internal Server Error
+2026-03-13 08:19:15 INFO [WebServer] GET /api/products 200 768ms 192.168.1.30
+2026-03-13 08:19:20 INFO [WebServer] GET /api/users 200 840ms 10.0.0.55
+2026-03-13 08:19:25 INFO [WebServer] POST /api/orders 201 862ms 10.0.0.88
+2026-03-13 08:19:30 INFO [WebServer] GET /api/dashboard 200 959ms 10.0.0.99
+2026-03-13 08:19:35 WARNING [WebServer] GET /api/reports/monthly 200 3016ms 192.168.1.10 - Slow response detected
+2026-03-13 08:19:40 INFO [CacheService] Cache hit ratio: 89% (threshold: 80%)
+2026-03-13 08:19:45 WARNING [CacheService] Cache hit ratio below target for catalog namespace
+2026-03-13 08:19:50 INFO [AuthService] User 'analyst' logged in successfully from 192.168.1.25
+2026-03-13 08:19:55 WARNING [AuthService] Failed login attempt for user 'deploy' from 192.168.1.30 (attempt 3/5)
+2026-03-13 08:20:00 ERROR [AuthService] Token validation failed for request from 10.0.0.55 - signature expired
+2026-03-13 08:20:05 INFO [Database] Query completed in 89ms - table=orders rows=74
+2026-03-13 08:20:10 WARNING [Database] Slow query detected in inventory lookup - duration=1555ms
+2026-03-13 08:20:15 ERROR [Database] Deadlock found when updating order_status; transaction rolled back
+2026-03-13 08:20:20 INFO [PaymentService] Payment authorized for order ORD-3157 in 237ms
+2026-03-13 08:20:25 ERROR [PaymentService] Payment gateway returned 502 for order ORD-3158
+2026-03-13 08:20:30 WARNING [SecurityModule] Rate limit nearing threshold for IP 192.168.1.25 (99 requests/min)
+2026-03-13 08:20:35 CRITICAL [SecurityModule] Credential stuffing pattern detected from IP 192.168.1.30
+2026-03-13 08:20:40 INFO [SecurityModule] IP 10.0.0.55 added to temporary blocklist for 10 minutes
+2026-03-13 08:20:45 INFO [SchedulerService] Running scheduled task: session_cleanup
+2026-03-13 08:20:50 INFO [CronJob] Purged 123 expired sessions
+2026-03-13 08:20:55 WARNING [SystemMonitor] CPU Usage: 68%, Memory: 59%, Disk: 82%
+2026-03-13 08:21:00 ERROR [WebServer] GET /api/reports/export 500 2145ms 192.168.1.15 - Internal Server Error
+2026-03-13 08:21:05 INFO [WebServer] GET /api/products 200 682ms 192.168.1.20
+2026-03-13 08:21:10 INFO [WebServer] GET /api/users 200 754ms 192.168.1.25
+2026-03-13 08:21:15 INFO [WebServer] POST /api/orders 201 776ms 192.168.1.30
+2026-03-13 08:21:20 INFO [WebServer] GET /api/dashboard 200 873ms 10.0.0.55
+2026-03-13 08:21:25 WARNING [WebServer] GET /api/reports/monthly 200 2930ms 10.0.0.88 - Slow response detected
+2026-03-13 08:21:30 INFO [CacheService] Cache hit ratio: 77% (threshold: 80%)
+2026-03-13 08:21:35 WARNING [CacheService] Cache hit ratio below target for catalog namespace
+2026-03-13 08:21:40 INFO [AuthService] User 'analyst' logged in successfully from 192.168.1.15
+2026-03-13 08:21:45 WARNING [AuthService] Failed login attempt for user 'deploy' from 192.168.1.20 (attempt 5/5)
+2026-03-13 08:21:50 ERROR [AuthService] Token validation failed for request from 192.168.1.25 - signature expired
+2026-03-13 08:21:55 INFO [Database] Query completed in 111ms - table=orders rows=96
+2026-03-13 08:22:00 WARNING [Database] Slow query detected in inventory lookup - duration=1797ms
+2026-03-13 08:22:05 ERROR [Database] Deadlock found when updating order_status; transaction rolled back
+2026-03-13 08:22:10 INFO [PaymentService] Payment authorized for order ORD-3179 in 259ms
+2026-03-13 08:22:15 ERROR [PaymentService] Payment gateway returned 502 for order ORD-3180
+2026-03-13 08:22:20 WARNING [SecurityModule] Rate limit nearing threshold for IP 192.168.1.15 (81 requests/min)
+2026-03-13 08:22:25 CRITICAL [SecurityModule] Credential stuffing pattern detected from IP 192.168.1.20
+2026-03-13 08:22:30 INFO [SecurityModule] IP 192.168.1.25 added to temporary blocklist for 10 minutes
+2026-03-13 08:22:35 INFO [SchedulerService] Running scheduled task: session_cleanup
+2026-03-13 08:22:40 INFO [CronJob] Purged 145 expired sessions
+2026-03-13 08:22:45 WARNING [SystemMonitor] CPU Usage: 86%, Memory: 67%, Disk: 86%
+2026-03-13 08:22:50 ERROR [WebServer] GET /api/reports/export 500 2059ms 10.0.0.99 - Internal Server Error
+2026-03-13 08:22:55 INFO [WebServer] GET /api/products 200 596ms 192.168.1.10
+2026-03-13 08:23:00 INFO [WebServer] GET /api/users 200 668ms 192.168.1.15
+2026-03-13 08:23:05 INFO [WebServer] POST /api/orders 201 690ms 192.168.1.20
+2026-03-13 08:23:10 INFO [WebServer] GET /api/dashboard 200 787ms 192.168.1.25
